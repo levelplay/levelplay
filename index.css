@@ -1,0 +1,457 @@
+/*--Animation--------------------------------------------------------------------------------------------------------------------------------------*/
+@keyframes fadeIn{
+    from {opacity:0;} to {opacity:1;}
+}
+@keyframes fadeOut{
+    from {opacity:1;} to {opacity:0;}
+}
+@keyframes expand{
+    from {width:0%;} to {width:100%;}
+}
+
+/*--Initial----------------------------------------------------------------------------------------------------------------------------------------*/
+body{
+    background-color:rgb(240,240,240);
+    font-family:"Arial";
+    user-select:none;
+    overflow:hidden;
+    padding:0px;
+    height:100%;
+    margin:0px;
+    width:100%;
+}
+.screen{
+    background-color:rgb(240,240,240);
+    position:absolute;
+    height:100%;
+    width:100%;
+    left:0px;
+    top:0px;
+}
+
+/*--Window-----------------------------------------------------------------------------------------------------------------------------------------*/
+.mask{
+    background-color:rgba(0,0,0,0.2);
+    position:absolute;
+    height:100%;
+    width:100%;
+    left:0px;
+    top:0px;
+}
+.window{
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+    border:1px solid rgb(200,200,200);
+    background-color:rgb(255,255,255);
+    transform:translate(-50%,-50%);
+    border-radius:min(1vh,1vw);
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+.window-head{
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    display:flex;
+
+    font-size:min(3vh,3vw);
+    height:min(5vh,5vw);
+    width:100%;
+}
+.window-body{
+    font-size:min(2vh,2vw);
+    padding:min(1vh,1vw);
+}
+.window-foot{
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    display:flex;
+
+    height:min(5vh,5vw);
+    width:100%;
+}
+
+/*--Buttons----------------------------------------------------------------------------------------------------------------------------------------*/
+.button{
+    background-color:rgb(255,255,255);
+    border:1px solid rgb(200,200,200);
+    margin-right:min(0.5vh,0.5vw);
+    margin-left:min(0.5vh,0.5vw);
+    border-radius:min(1vh,1vw);
+    transform:translateY(0px);
+    font-size:min(2vh,2vw);
+    width:min(15vh,15vw);
+    height:min(3vh,3vw);
+
+    white-space:nowrap;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    display:flex;
+}
+.button:hover{
+    transform:translateY(-1px);
+}
+.button:active{
+    transform:translateY(1px);
+}
+
+/*--Log In Screen----------------------------------------------------------------------------------------------------------------------------------*/
+.log-in-text{
+    margin-top:min(1vh,1vw);
+    font-size:min(2vh,2vw);
+    height:min(3vh,3vw);
+    padding-left:2%;
+    width:98%;
+
+    justify-content:flex-start;
+    align-items:flex-end;
+    display:flex;
+}
+input[type=text],[type=password],[type=date]{
+    font-family:"Arial";
+    border:1px solid rgb(200,200,200);
+    border-radius:min(1vh,1vw);
+    font-size:min(2vh,2vw);
+    height:min(3vh,3vw);
+    margin-left:2%;
+    width:95%;
+}
+#register-back{
+    display:none;
+}
+#log-in-window{
+    width:min(40vh,90vw);
+    overflow:hidden;
+}
+.log-in-foot{
+    padding-bottom:min(5vh,5vw);
+}
+.register-text{
+    transform:translate(-50%);
+    position:absolute;
+    width:100%;
+    left:50%;
+    top:min(6vh,6vw);
+
+    justify-content:center;
+    align-items:center;
+    display:flex;
+}
+a{
+    cursor:pointer;
+    color:rgb(0,100,255);
+    text-decoration:underline;
+    margin-left:min(0.5vh,0.5vw);
+    margin-right:min(0.5vh,0.5vw);
+}
+#log-in{
+    display:none;
+}
+#log-in-name{
+    display:none;
+}
+#log-in-name-input{
+    display:none;
+}
+#log-in-date{
+    display:none;
+}
+#log-in-date-input{
+    display:none;
+}
+#log-in-email{
+    display:none;
+}
+#log-in-email-input{
+    display:none;
+}
+#log-in-password-input{
+    margin-bottom:min(2vh,2vw);
+}
+
+/*--Main Page--------------------------------------------------------------------------------------------------------------------------------------*/
+.title{
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+    border:1px solid rgb(200,200,200);
+    background-color:rgb(255,255,255);
+    font-size:min(5vh,5vw);
+    height:min(7vh,7vw);
+    font-weight:bold;
+    width:100%;
+    
+    justify-content:center;
+    align-items:center;
+    display:flex;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search-btn{
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #707174;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search-btn :hover{
+    background-color: #1e1f20;
+}
+
+input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.invite{
+    position:absolute;
+    top:min(10vh,10vw);
+    height:min(5vh,5vw);
+    width:min(20vh,20vw);
+    font-size:min(3vh,3vw);
+    color:rgb(255,255,255);
+    left:calc(50% - min(22vh,22vw));
+    background-color:rgb(0,100,255);
+    border:1px solid rgb(0,50,205);
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+}
+.public-active{
+    position:absolute;
+    top:min(10vh,10vw);
+    height:min(5vh,5vw);
+    width:min(20vh,20vw);
+    font-size:min(3vh,3vw);
+    color:rgb(255,255,255);
+    left:calc(50% + min(1vh,1vw));
+    background-color:rgb(0,100,255);
+    border:1px solid rgb(0,50,205);
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+}
+.public-inactive{
+    position:absolute;
+    top:min(10vh,10vw);
+    height:min(5vh,5vw);
+    width:min(20vh,20vw);
+    font-size:min(3vh,3vw);
+    color:rgb(255,255,255);
+    left:calc(50% + min(1vh,1vw));
+    background-color:rgba(0,100,255,0.5);
+    border:1px solid rgba(0,50,205,0.5);
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+}
+
+.open-games{
+    height:calc(100% - min(20vh,20vw));
+    transform:translate(-50%);
+    padding:min(1vh,1vw);
+    top:min(17vh,17vw);
+    overflow:hidden;
+}
+.open-games-list{
+    border:1px solid rgb(200,200,200);
+    background-color:rgb(220,220,220);
+    height:calc(100% - min(6vh,6vw));
+    border-radius:min(1vh,1vw);
+    width:min(40vh,80vw);
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+.game{
+    box-shadow:min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) rgba(0,0,0,0.1);
+    background-color:rgb(255,255,255);
+    border:1px solid rgb(200,200,200);
+    border-radius:min(1vh,1vw);
+    margin-right:min(1vh,1vw);
+    margin-left:min(1vh,1vw);
+    margin-top:min(1vh,1vw);
+    height:min(8vh,8vw);
+}
+.game-name{
+    font-size:min(2vh,2vw);
+    padding-left:5%;
+    height:50%;
+    width:95%;
+
+    justify-content:flex-start;
+    align-items:center;
+    display:flex;
+}
+.game-button{
+    justify-content:center;
+    align-items:center;
+    display:flex;
+
+    height:50%;
+    width:100%;
+}
+#main-page{
+    display:block;
+}
+.find-friends-page{
+    display: none;
+}
+.log-out{
+    position:absolute;
+    right:min(1vh,1vw);
+}
+
+/*--Game Screen------------------------------------------------------------------------------------------------------------------------------------*/
+#game{
+    display:none;
+}
+#game-over-window{
+    width:min(40vh,40vw);
+}
+#game-over-body{
+    font-size:min(2.5vh,2.5vw);
+    height:min(10vh,10vw);
+
+    justify-content:center;
+    align-items:center;
+    display:flex;
+}
+#game-over{
+    display:none;
+}
+
+.player-holder{
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+    background-color:rgb(255,255,255);
+    border:1px solid rgb(200,200,200);
+    border-radius:min(1vh,1vw);
+    font-size:min(3vh,3vw);
+    width:min(20vh,20vw);
+    height:min(5vh,5vw);
+
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    display:flex;
+}
+.player-1{
+    position:absolute;
+    left:calc(min(1vh,1vw) + 2px);
+    top:calc(min(1vh,1vw) + 2px);
+}
+.player-2{
+    position:absolute;
+    right:calc(min(1vh,1vw) + 2px);
+    top:calc(min(1vh,1vw) + 2px);
+}
+.current-turn-left{
+    border:3px solid rgb(100,100,255);
+    left:min(1vh,1vw);
+    top:min(1vh,1vw);
+}
+.current-turn-right{
+    border:3px solid rgb(100,100,255);
+    right:min(1vh,1vw);
+    top:min(1vh,1vw);
+}
+
+.game-holder{
+    box-shadow:0px 0px min(1vh,1vw) rgba(0,0,0,0.2);
+    background-color:rgb(255,255,255);
+    border:1px solid rgb(200,200,200);
+    border-radius:min(1vh,1vw);
+    transform:translate(-50%);
+    position:absolute;
+
+    padding-top:min(2.8vh,3.84vw);
+    height:min(67.2vh,92.16vw);
+    width:min(70vh,96vw);
+    top:min(8vh,8vw);
+    left:50%;
+}
+.game-row{
+    justify-content:center;
+    align-items:center;
+    display:flex;
+
+    height:32%;
+    width:100%;
+}
+.game-spot{
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    display:flex;
+
+    border:1px solid rgb(200,200,200);
+    height:calc(100% - 1px);
+    aspect-ratio:1;
+}
+#quit-before{
+    left:calc(50% - min(7.5vh,7.5vw));
+    top:min(80vh,107vw);
+    position:absolute;
+}
+.o{
+    border:min(2vh,2vw) solid rgb(0,100,255);
+    animation:"fadeIn" ease-in-out 0.2s;
+    border-radius:100%;
+    aspect-ratio:1;
+    height:60%;
+}
+.x{
+    animation:"fadeIn" ease-in-out 0.2s;
+    position:relative;
+    aspect-ratio:1;
+    height:60%;
+}
+.x-bar{
+    border:min(1.5vh,1.5vw) solid rgb(255,0,100);
+    background-color:rgb(255,0,100);
+    border-radius:min(1.5vh,1.5vw);
+    position:absolute;
+    height:125%;
+    width:px;
+    left:50%;
+    top:50%;
+}
+.x-1{
+    transform:translate(-50%,-50%) rotate(45deg);
+}
+.x-2{
+    transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+.check-holder{
+    display:none;
+    position:absolute;
+    transform:translate(-50%);
+    height:min(70vh,96vw);
+    width:min(70vh,96vw);
+    top:min(8vh,8vw);
+    left:50%;
+}
+.line{
+    background-color:rgb(200,200,200);
+    transform:translate(-50%,-50%);
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    border-radius:min(4vh,4vw);
+    height:min(4vh,4vw);
+    width:80%;
+}
+.diagonal1{
+    transform:translate(-50%,-50%) rotate(45deg);
+    width:120%;
+}
+.diagonal2{
+    transform:translate(-50%,-50%) rotate(-45deg);
+    width:120%;
+}
+.vertical{
+    transform:translate(-50%,-50%) rotate(90deg);
+}

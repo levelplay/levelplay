@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" type="text/css" href="./index.css">
+        <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
+        <script type="text/javascript" src="./index.js"></script>
+    </head>
+    <body>
+        <!--Login Page-->
+        <div class="screen" id="log-in">
+            <div class="window" id="log-in-window">
+                <div class="window-head">Tic Tac Toe</div>
+                <div class="window-body">
+                    <div class="log-in-text" id="log-in-name">Name:</div>
+                    <input type="text" id="log-in-name-input">
+                    <div class="log-in-text" id="log-in-date">Date of Birth:</div>
+                    <input type="date" id="log-in-date-input">
+                    <div class="log-in-text"  id="log-in-email">Email Address:</div>
+                    <input type="text"  id="log-in-email-input">
+                    <div class="log-in-text" id="log-in-username">Username:</div>
+                    <input type="text" id="log-in-username-input">
+                    <div class="log-in-text" id="log-in-password">Password:</div>
+                    <input type="password" id="log-in-password-input">
+                </div>
+                <div class="window-foot log-in-foot" id="log-in-foot">
+                    <div class="button" id="log-in-button">Log In</div>
+                    <div class="button" id="register-back">Back</div>
+                    <div class="register-text">Don't have an account? Click <a id="go-to-register">here</a> to register</div>
+                </div>
+            </div>
+        </div>
+        <!--Main Page-->
+        <div class="screen" id="main-page">
+            <div class="title">
+                <div class="button log-out" id="log-out">Log Out</div>
+                Tic Tac Toe
+            </div>
+            <div class="button invite" id="invite">Add Player</div>
+            <div class="button public-active" id="public">Public</div>
+            <div class="window open-games">
+                <div class="window-head">Open Games</div>
+                
+                <div class="open-games-list"></div>
+            </div>
+        </div>
+        <div class="find-friends-page">
+            <div class="title">
+                <div class="button log-out" id="log-out">Log Out</div>
+                Tic Tac Toe
+            </div>
+            <div class="window open-games">
+                <div class="window-head">Add Players</div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Enter Username">
+                    <button id="searchButton" class="search-btn">Find</button>
+                    <div class="recent-players-list"></div>
+                </div>
+            </div>
+            
+        </div>
+        <!--Game section-->
+        <div class="screen" id="game">
+            <div class="player-holder player-1">Player 1</div>
+            <div class="player-holder player-2">Player 2</div>
+            <div class="game-holder">
+                <div class="game-row">
+                    <div class="game-spot" id="x0-y0"></div>
+                    <div class="game-spot" id="x1-y0"></div>
+                    <div class="game-spot" id="x2-y0"></div>
+                </div>
+                <div class="game-row">
+                    <div class="game-spot" id="x0-y1"></div>
+                    <div class="game-spot" id="x1-y1"></div>
+                    <div class="game-spot" id="x2-y1"></div>
+                </div>
+                <div class="game-row">
+                    <div class="game-spot" id="x0-y2"></div>
+                    <div class="game-spot" id="x1-y2"></div>
+                    <div class="game-spot" id="x2-y2"></div>
+                </div>
+            </div>
+            <div class="check-holder">
+                <div class="line" id="line"></div>
+            </div>
+            <div class="button" id="quit-before">Quit</div>
+            <div class="mask" id="game-over">
+                <div class="window" id="game-over-window">
+                    <div class="window-head">Game Over</div>
+                    <div class="window-body" id="game-over-body"></div>
+                    <div class="window-foot">
+                        <div class="button" id="rematch">Rematch</div>
+                        <div class="button" id="quit-after">Quit</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
