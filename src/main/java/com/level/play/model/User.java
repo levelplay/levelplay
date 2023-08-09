@@ -2,53 +2,27 @@ package com.level.play.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 @Data
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_id_seq")
+    @SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", allocationSize=1)
+    private Long id;
 
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "profile_picture")
     private String profilePicture;
-
-    // Constructors, getters, and setters (optional) - You can generate these using your IDE or write them manually.
-
-    public User() {
-        // Default constructor for JPA
-    }
-
-    public User(String username, String email, String password, String profilePicture) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.profilePicture = profilePicture;
-    }
-
-    // Getters and Setters (generated or written manually)
-    // ...
-
-    // You can also override toString() and equals() methods if needed.
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", profilePicture='" + profilePicture + '\'' +
-                '}';
-    }
 }

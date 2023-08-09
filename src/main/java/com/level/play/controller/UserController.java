@@ -1,6 +1,8 @@
 package com.level.play.controller;
 
+import com.level.play.dto.Game;
 import com.level.play.dto.User;
+import com.level.play.service.GameService;
 import com.level.play.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final GameService gameService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, GameService gameService) {
         this.userService = userService;
+        this.gameService = gameService;
     }
 
     @PostMapping("/register")
@@ -38,6 +42,30 @@ public class UserController {
             return new ResponseEntity<>("Login successful!", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Invalid username or password.", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PostMapping("/search/user")
+    public ResponseEntity<Object> searchUser(@RequestParam String username) {
+        User user = userService.searchUser(username);
+
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/search/game")
+    public ResponseEntity<Object> searchGame(@RequestParam String title) {
+        // Validate username and password (optional)
+
+        // Check if the game exists and password matches
+        Game game = gameService.searchGame(title);
+        if (game != null) {
+            return new ResponseEntity<>(game, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Game not found.", HttpStatus.UNAUTHORIZED);
         }
     }
 }
