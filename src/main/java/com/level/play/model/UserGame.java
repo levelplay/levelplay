@@ -1,18 +1,18 @@
 package com.level.play.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "user_game")
+@Data
 public class UserGame {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userGameId;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="default_id_seq")
+    @SequenceGenerator(name="default_id_seq", sequenceName = "default_id_seq", allocationSize=1)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -24,30 +24,4 @@ public class UserGame {
 
     private int userPoints;
 
-    // Constructors, getters, and setters (optional) - You can generate these using your IDE or write them manually.
-
-    public UserGame() {
-        // Default constructor for JPA
-    }
-
-    public UserGame(com.level.play.model.User user, com.level.play.model.Game game, int userPoints) {
-        this.user = user;
-        this.game = game;
-        this.userPoints = userPoints;
-    }
-
-    // Getters and Setters (generated or written manually)
-    // ...
-
-    // You can also override toString() and equals() methods if needed.
-
-    @Override
-    public String toString() {
-        return "UserGame{" +
-                "userGameId=" + userGameId +
-                ", user=" + user +
-                ", game=" + game +
-                ", userPoints=" + userPoints +
-                '}';
-    }
 }

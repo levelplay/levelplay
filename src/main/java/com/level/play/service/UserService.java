@@ -20,7 +20,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(User user) { // Use com.level.play.entity.User
+    public User registerUser(User user) {
         // Check if the username or email is already taken
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new IllegalArgumentException("Username already taken");
@@ -32,9 +32,9 @@ public class UserService {
 
         // Hash the user's password before saving it to the database
         String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
 
         com.level.play.model.User userEntity = new com.level.play.model.User();
+        userEntity.setUsername(user.getUsername());
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(encodedPassword);
         userEntity.setProfilePicture(user.getProfilePicture());
