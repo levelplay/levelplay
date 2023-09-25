@@ -1,0 +1,31 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id='create-Challenges_table' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="challenges"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE challenges
+            (
+                challenge_id     INT PRIMARY KEY,
+                challenger_id    INT,
+                opponent_id      INT,
+                game_id          INT,
+                challenge_date   DATE,
+                challenge_status VARCHAR(20),
+                challenge_result VARCHAR(20),
+                FOREIGN KEY (challenger_id) REFERENCES Users (user_id),
+                FOREIGN KEY (opponent_id) REFERENCES Users (user_id),
+                FOREIGN KEY (game_id) REFERENCES Games (game_id)
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
