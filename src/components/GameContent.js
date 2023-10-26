@@ -1,6 +1,14 @@
 import React from "react";
 import TicTacToe from "./Tic Tac Toe";
 export default function GameContent(props){
+
+    /*This state tracks who won a specific round, and update the point accordingly
+    *I actually need help with implementing this logic*/
+    //const [userWon, setUserWon] = React.useState()
+    
+  
+    
+    
     return(
         <div className="gamecontent">
             <p className="gamecontent--users">{`${props.opponent} vs ${props.userName}`}</p>

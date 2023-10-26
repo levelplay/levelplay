@@ -2,6 +2,7 @@ import React from "react";
 import UpperContent from "./UpperContent";
 import Form from "./Form";
 import GameContent from "./GameContent";
+import Friends from "./Friends";
 
 export default function MainContent(props){
 
@@ -13,6 +14,9 @@ export default function MainContent(props){
         userMove:true,
         opponentMove:false
     })
+
+    const [isPopupOpen, setPopupOpen] = React.useState(false)
+
     function updateData(){
         setData(prevState =>{
             return{
@@ -24,15 +28,32 @@ export default function MainContent(props){
             }
         })
     }
+    const openPopup = () => {
+        setPopupOpen(true)
+    }
+    const closePopup = () =>{
+        setPopupOpen(false)
+    }
+
     
 
     return(
         <div className="mainContent">
+            {isPopupOpen ? (
+                <Friends
+                    closePopup={closePopup}
+                    friendsData = {data}
+                />
+            ) : (
+           <>
            <UpperContent
                 login={props.login}
+                hasAccount = {props.hasAccount}
                 gameInitiated={props.gameInitiated}
+                openPopup = {openPopup}
            />
-           {!props.gameInitiated &&
+            
+           {!props.gameInitiated && (
            <Form
                 props={props}
                 login={props.login}
@@ -40,16 +61,19 @@ export default function MainContent(props){
                 updateAccount = {props.updateAccount}
                 updateGameInitiated = {props.updateGameInitiated}
            />
-            }
-           {props.gameInitiated &&
+            )}
+           {props.gameInitiated && (
            <GameContent
                 opponent={data.opponent}
                 opponentPoints = {data.opponentPoints}
                 userName={data.userName}
                 userNamePoints={data.userNamePoints}
-                updateData={updateData}
+                /*updateData={() => updateData(typeData)}*/
            />
-            }
+           )}
+        </>
+    )}  
+        
         </div>
     )
 }

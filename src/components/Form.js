@@ -48,17 +48,18 @@ export default function Form(props){
     function handleContinueAsGuest(){
         props.updateGameInitiated()
     }
+   
 
     return(
         <form className="form">
                 <input
                     type="text"
-                    name="userName"
+                    name= "userName"
                     id="userName"
                     value={formData.userName}
                     onChange={handleChange}
                     className="form--input"
-                    placeholder="Username"
+                    placeholder={props.login ? "Username" : "Create username"}
                 />
                  {!props.login && 
                     <input

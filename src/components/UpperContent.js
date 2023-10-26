@@ -9,11 +9,14 @@ export default function UpperContent(props){
             return;
         }
         //code to handle adding a friend here
+        props.openPopup()
         
     }
     function autoMatch(){
         //code here
     }
+
+
 
 
 

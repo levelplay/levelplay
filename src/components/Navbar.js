@@ -9,7 +9,17 @@ export default function Navbar(props){
             alert("You need to sign up to sign up to do this")
             return;
         }
-        //Code to create a link here. 
+        //create input element to hold the invite link.
+        const input = document.createElement("input");
+        input.value = "https://www.google.com";
+
+        //Append the input element to teh document (it can be hidden)
+        document.body.appendChild(input)
+        input.select()
+        input.setSelectionRange(0, 999999)
+        document.execCommand("copy")
+        document.body.removeChild(input)
+        alert("Invite link copied to clipboard!")
     }
     const styles = {
         textDecoration: "underline"
