@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "./App.css"
+import Navbar from './components/Navbar';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default function App() {
+
+  /**OUR STATES */
+  const [hasAccount, setHasAccount] = React.useState(false)
+
+
+  const [gameInitiated, setGameInitiated] = React.useState(false)
+  
+  /**Look at this as a question Login? so if not then sign in, if not that then continue as guest */
+  const [login, setLogin] = React.useState(false)
+  
+/*function changes the login boolena state*/
+function updateLogin(){
+  setLogin(prevState => !prevState)
 }
 
-export default App;
+  /**function updates the hasAccount state */
+  function updateHasAccount(){
+    setHasAccount(true)
+  }
+  /**Function update the gameInitated state for the user to start getting to play the game */
+  function initiateGameplay(){
+    setGameInitiated(true)
+  }
+
+
+  return (
+    <div className='App'>
+      {hasAccount && <h1 className='form'>Hello React</h1>}
+      <Navbar
+        hasAccount={hasAccount}
+        login={login}
+        updateLogin={updateLogin}
+        gameInitiated={gameInitiated}
+        setGameInitiated={setGameInitiated}
+      />
+      <MainContent
+        login={login}
+        hasAccount={hasAccount}
+        updateAccount={updateHasAccount}
+        gameInitiated ={gameInitiated}
+        updateGameInitiated = {initiateGameplay}
+      />
+      <Footer />
+    </div>
+  )
+}
+
+
