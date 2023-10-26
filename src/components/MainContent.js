@@ -17,6 +17,8 @@ export default function MainContent(props){
         setData(prevState =>{
             return{
                 ...prevState,
+                /**This code needs to be updated when the add friend button
+                 *  and that section has functionality. */
                 userName:"Username-Example",
                 opponent:"Opponent Username"
             }

@@ -4,12 +4,13 @@ const TicTacToe = () => {
     // Initialize the game board as an array
     const [board, setBoard] = React.useState(Array(9).fill(null));
     const [xIsNext, setXIsNext] = React.useState(true); // To track whose turn it is (X or O)
-  
+    let count = 0;
     // Function to handle a square click
     const handleSquareClick = (index) => {
       if (calculateWinner(board) || board[index]) {
         // If there's a winner or the square is already filled, return early
-        return;
+        count++;
+        
       }
   
       // Create a copy of the current board
@@ -68,12 +69,17 @@ const TicTacToe = () => {
   let status;
   if (winner) {
     status = `Winner: ${winner}`;
-  } else {
-    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+  } else if( !winner && count !== 9) {
+    status = `Next player: ${xIsNext ? 'X' : 'O'} ${count}`;
+  }else if(!winner && count === 9){
+    status = "Draw"
   }
 
   return (
-    <div className="game">
+    <div>
+        <div>{status}</div>
+        <br/>
+        <div className="game">
       <div className="game-board">
         <div className="board-row">
           {renderSquare(0)}
@@ -92,9 +98,10 @@ const TicTacToe = () => {
         </div>
       </div>
       <div className="game-info">
-        <div>{status}</div>
       </div>
     </div>
+    </div>
+    
   );
 };
 export default TicTacToe

@@ -3,8 +3,16 @@ import React from "react"
 export default function UpperContent(props){
 
 
-    function handlClick(){
-        console.log("Hello world")
+    function handleAddFriend(){
+        if(!props.hasAccount){
+            alert("You need to sign up to sign up to do this")
+            return;
+        }
+        //code to handle adding a friend here
+        
+    }
+    function autoMatch(){
+        //code here
     }
 
 
@@ -20,10 +28,10 @@ export default function UpperContent(props){
                 </div> :
 
                 <div className="upperContent--gameplay">
-                    <div className="upperContent-main-btn" onClick={handlClick}>Add a friend</div>
+                    <div className="upperContent-main-btn" onClick={handleAddFriend}>Add a friend</div>
                     <div className="upperContent-btns">
-                        <div className="generic-black-btn" onClick={handlClick}>FRIENDS</div>
-                        <div className="generic-black-btn" onClick={handlClick}>AUTOMATCH</div>  
+                        <div className="generic-black-btn" onClick={handleAddFriend}>FRIENDS</div>
+                        <div className="generic-black-btn" onClick={autoMatch}>AUTOMATCH</div>  
                     </div>
 
                 </div>

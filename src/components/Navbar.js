@@ -4,7 +4,15 @@ export default function Navbar(props){
 
     /**Function creates and copies an invite link */
     function inviteLink(){
-        //Code to create the link here
+        
+        if(!props.hasAccount){
+            alert("You need to sign up to sign up to do this")
+            return;
+        }
+        //Code to create a link here. 
+    }
+    const styles = {
+        textDecoration: "underline"
     }
     return(
       <div className="navbar">
@@ -17,8 +25,9 @@ export default function Navbar(props){
                  {!props.login ? "LOGIN" : "SIGN UP"} 
             </h4> :
             <h4 className="navbar--login-status"
-                onClick={props.hasAccount ? alert("You need to sign up to sign up to do this") : inviteLink}
-                >{props.hasAccount ? "Invite link" : "SIGN UP"} 
+                onClick={inviteLink}
+                style={styles}
+                >Invite Link 
             </h4> 
         }
       </div>  

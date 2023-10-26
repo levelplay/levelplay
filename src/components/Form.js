@@ -36,10 +36,11 @@ export default function Form(props){
 
     function handleSubmit(event){
         event.preventDefault()
-        if(formData.password === formData.confirmPassWord && formData.password != null){
+        if(formData.password === formData.confirmPassWord && formData.password.length && formData.userName.length && formData.email){
             //pushing the data to the API
             showAlert(false)
-            props.updateAccount() //updating the parent state through props.
+            props.updateAccount(true) //updating the parent state through props.
+            props.updateGameInitiated()
             //and run more functions here
         }
     }
