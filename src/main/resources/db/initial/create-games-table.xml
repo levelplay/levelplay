@@ -23,4 +23,22 @@
         </sql>
     </changeSet>
 
+    <changeSet id='create-games-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="games"/>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE games_id_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id='set-games-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="games"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE games ALTER COLUMN game_id SET DEFAULT nextval('games_id_seq');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

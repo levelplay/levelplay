@@ -11,6 +11,7 @@
    <include relativeToChangelogFile="true" file="create-challenges-table.xml"/>
    <include relativeToChangelogFile="true" file="create-tournaments-table.xml"/>
    <include relativeToChangelogFile="true" file="create-tournament_participants-table.xml"/>
+<!--   <include relativeToChangelogFile="true" file="insert-super-user.xml"/>-->
 
 
 </databaseChangeLog>

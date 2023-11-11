@@ -116,7 +116,11 @@
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
-      <version>3.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.blagerweij</groupId>
+      <artifactId>liquibase-sessionlock</artifactId>
+      <version>1.5.1</version>
     </dependency>
 
   </dependencies>
@@ -135,7 +139,6 @@
         <version>3.7.0</version>
         <configuration>
           <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-          <changeLogFile>/src/main/resources/db/changelog.xml</changeLogFile>
         </configuration>
       </plugin>
 
