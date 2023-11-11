@@ -23,4 +23,21 @@
         </sql>
     </changeSet>
 
+    <changeSet id='create-tournament_participants-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tournament_participants"/>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE tournament_participants_id_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id='set-tournament_participants-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tournament_participants"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE tournament_participants ALTER COLUMN tournament_participant_id SET DEFAULT nextval('tournament_participants_id_seq');
+        </sql>
+    </changeSet>
 </databaseChangeLog>

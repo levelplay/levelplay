@@ -28,4 +28,22 @@
         </sql>
     </changeSet>
 
+    <changeSet id='create-challenges-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="challenges"/>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE challenges_id_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id='set-challenges-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="challenges"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE challenges ALTER COLUMN challenge_id SET DEFAULT nextval('challenges_id_seq');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
