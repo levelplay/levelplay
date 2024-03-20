@@ -12,6 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_id_seq")
     @SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", allocationSize=1)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "username")
@@ -20,7 +21,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "user_password")
     private String password;
 
     @Column(name = "profile_picture")

@@ -1,11 +1,10 @@
 package com.level.play.service;
 
-import com.level.play.dto.User;
+import com.level.play.model.User;
 import com.level.play.repository.GameRepository;
 import com.level.play.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(User user) {
+    public com.level.play.dto.User registerUser(com.level.play.dto.User user) {
         // Check if the username or email is already taken
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new IllegalArgumentException("Username already taken");
@@ -50,18 +49,33 @@ public class UserService {
     }
 
     public boolean authenticateUser(String username, String password) {
-        // Load the user from the database using the userRepository
-        User user = (User) userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        log.info("Verifying the user exists...");
+        User user = userRepository.findByUsername(username);
 
-        // Check if the provided password matches the stored hashed password
-        return passwordEncoder.matches(password, user.getPassword());
+        // Check if the user exists
+        if (user == null) {
+            log.info("User does not exist.");
+            return false; // User not found, return false
+        }
+
+        // Check if the entered password matches the stored password
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            log.info("Password and email do not match");
+            return false; // Invalid password, return false
+        }
+
+        return true;
     }
 
-    public User searchUser(String username) {
-        // Load the user from the database using the userRepository
-        User user = (User) userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+    public User searchUser(String username) throws Exception {
+        log.info("Retrieving user by username....");
+        User user = userRepository.findByUsername(username);
+
+        // Check if the user exists
+        if (user == null) {
+            log.info("User does not exists");
+            throw new Exception("User not found");
+        }
 
         return user;
     }
