@@ -1,0 +1,44 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id='create-games_table' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="games"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE games
+            (
+                game_id INT PRIMARY KEY,
+                game_name VARCHAR(100),
+                game_description VARCHAR(500),
+                player1 VARCHAR (100),
+                player2 VARCHAR(100)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id='create-games-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="games"/>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE games_id_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id='set-games-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="games"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE games ALTER COLUMN game_id SET DEFAULT nextval('games_id_seq');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

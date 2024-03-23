@@ -1,0 +1,43 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id='create-tournament_participants_table' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="tournament_participants"/>
+            </not>
+        </preConditions>
+        <sql>
+            CREATE TABLE tournament_participants
+            (
+                tournament_participant_id INT PRIMARY KEY,
+                tournament_id             INT,
+                user_id                   INT,
+                FOREIGN KEY (tournament_id) REFERENCES Tournaments (tournament_id),
+                FOREIGN KEY (user_id) REFERENCES Users (user_id)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id='create-tournament_participants-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tournament_participants"/>
+        </preConditions>
+        <sql>
+            CREATE SEQUENCE tournament_participants_id_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id='set-tournament_participants-sequence' author="langelihle" context="localhost">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tournament_participants"/>
+        </preConditions>
+        <sql>
+            ALTER TABLE tournament_participants ALTER COLUMN tournament_participant_id SET DEFAULT nextval('tournament_participants_id_seq');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -6,59 +6,154 @@
         <link rel="stylesheet" type="text/css" href="./index.css">
         <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
         <script type="text/javascript" src="./index.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous">
     </head>
     <body>
         <!--Login Page-->
-        <div class="screen" id="log-in">
-            <div class="window" id="log-in-window">
-                <div class="window-head">Tic Tac Toe</div>
-                <div class="window-body">
-                    <div class="log-in-text" id="log-in-name">Name:</div>
-                    <input type="text" id="log-in-name-input">
-                    <div class="log-in-text" id="log-in-date">Date of Birth:</div>
-                    <input type="date" id="log-in-date-input">
-                    <div class="log-in-text"  id="log-in-email">Email Address:</div>
-                    <input type="text"  id="log-in-email-input">
-                    <div class="log-in-text" id="log-in-username">Username:</div>
-                    <input type="text" id="log-in-username-input">
-                    <div class="log-in-text" id="log-in-password">Password:</div>
-                    <input type="password" id="log-in-password-input">
+        <div class="card container" id="login-form">
+            <div class="card-header">
+                <h2 class="text-center">Tic Tac Toe</h2>
+            </div>
+            <div class="card-header">
+                <h2 class="text-center">Login Form</h2>
+            </div>
+            <div class="container login-incorrect-error">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">Invalid Email or Password</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="window-foot log-in-foot" id="log-in-foot">
-                    <div class="button" id="log-in-button">Log In</div>
-                    <div class="button" id="register-back">Back</div>
-                    <div class="register-text">Don't have an account? Click <a id="go-to-register">here</a> to register</div>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/login}"
+                        class="form-horizontal"
+
+                >
+                    <div class="form-group mb-3">
+                        <label class="control-label"> Email</label>
+                        <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                class="form-control"
+                                placeholder="Enter email address"
+                                required
+                        />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label"> Password</label>
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Enter password"
+                                required
+                        />
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary" >Login</button>
+                        <span> Not registered ?
+                                <a id="register-redirect" style="color: blue">Register/Signup here</a>
+                            </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- signup page-->
+        <div class="container" id="sign-up-page">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="text-center">Tic Tac Toe</h2>
+                        </div>
+                        <div class="card-header">
+                            <h2 class="text-center">Register</h2>
+                        </div>
+
+                        <form
+                                method="post"
+                                role="form"
+                                action="@{/register}"
+                                class="form-horizontal"
+                                id="signup-form"
+                        >
+                            <div class="window-body">
+                                <div class="sign-up-text"  id="sign-up-email">Email Address:</div>
+                                <input type="text"  id="sign-up-email-input" name="email" required>
+                                <div class="sign-up-text" id="sign-up-username">Username:</div>
+                                <input type="text" id="sign-up-username-input" name="username" required>
+                                <div class="sign-up-text" id="sign-up-password">Password:</div>
+                                <input type="password" id="sign-up-password-input" name="password" required>
+                            </div>
+                            <div class="window-foot sign-up-foot" id="sign-up-foot">
+                                <button class="btn btn-primary" id="sign-up-button" >Register</button>
+
+                                <div class="register-text">Don't have an account? Click <a id="signin-redirect" style="color: blue">here</a> to login</div>
+                            </div>
+
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
         <!--Main Page-->
         <div class="screen" id="main-page">
             <div class="title">
                 <div class="button log-out" id="log-out">Log Out</div>
                 Tic Tac Toe
             </div>
-            <div class="button invite" id="invite">Add Player</div>
-            <div class="button public-active" id="public">Public</div>
+            <div class="button invite " id="open-search-player">Add Player</div>
+            <div class="button public-active " id="open-search-game">Search Game</div>
+
             <div class="window open-games">
                 <div class="window-head">Open Games</div>
                 
                 <div class="open-games-list"></div>
             </div>
         </div>
-        <div class="find-friends-page">
-            <div class="title">
-                <div class="button log-out" id="log-out">Log Out</div>
-                Tic Tac Toe
-            </div>
+<!--        open search player page-->
+        <div class="open-search-player-page">
+
             <div class="window open-games">
-                <div class="window-head">Add Players</div>
+
                 <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Enter Username">
-                    <button id="searchButton" class="search-btn">Find</button>
+                    <input type="text" id="searchInput" name="search-player" placeholder="Enter username" required>
+                    <button id="search-button-player" class="btn btn-primary">Search</button>
                     <div class="recent-players-list"></div>
                 </div>
             </div>
-            
+
+        </div>
+        <!--        open search game page-->
+        <div class="open-search-game-page">
+
+            <div class="window open-games">
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" name="search-game" placeholder="Enter game " required>
+                    <button id="search-button-game" class="btn btn-primary">Search</button>
+                    <div class="recent-players-list"></div>
+                </div>
+            </div>
+
         </div>
         <!--Game section-->
         <div class="screen" id="game">
@@ -96,5 +191,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>
