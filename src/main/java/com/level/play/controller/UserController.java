@@ -63,26 +63,13 @@ public class UserController {
     }
 
     @PostMapping("/search/user")
-    public ResponseEntity<Object> searchUser(@RequestParam String username) throws Exception {
+    public ResponseEntity<Object> searchUser(@RequestBody String username) throws Exception {
         com.level.play.model.User user = userService.searchUser(username);
 
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping("/search/game")
-    public ResponseEntity<Object> searchGame(@RequestParam String title) {
-        // Validate username and password (optional)
-
-        // Check if the game exists and password matches
-        Game game = gameService.searchGame(title);
-        if (game != null) {
-            return new ResponseEntity<>(game, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Game not found.", HttpStatus.UNAUTHORIZED);
         }
     }
 

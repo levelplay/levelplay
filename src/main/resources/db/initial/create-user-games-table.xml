@@ -14,12 +14,12 @@
         <sql>
             CREATE TABLE user_games
             (
-                user_game_id INT PRIMARY KEY,
+                id INT PRIMARY KEY,
                 user_id      INT,
                 game_id      INT,
                 user_points  INT,
                 FOREIGN KEY (user_id) REFERENCES Users (user_id),
-                FOREIGN KEY (game_id) REFERENCES Games (game_id)
+                FOREIGN KEY (game_id) REFERENCES Games (id)
             );
         </sql>
     </changeSet>
@@ -38,7 +38,7 @@
             <tableExists tableName="user_games"/>
         </preConditions>
         <sql>
-            ALTER TABLE user_games ALTER COLUMN user_game_id SET DEFAULT nextval('user_games_id_seq');
+            ALTER TABLE user_games ALTER COLUMN id SET DEFAULT nextval('user_games_id_seq');
         </sql>
     </changeSet>
 
