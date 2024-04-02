@@ -1,5 +1,6 @@
 package com.level.play.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.level.play.dto.Game;
 import com.level.play.dto.User;
 import com.level.play.service.GameService;
@@ -63,8 +64,12 @@ public class UserController {
     }
 
     @PostMapping("/search/user")
-    public ResponseEntity<Object> searchUser(@RequestBody String username) throws Exception {
-        com.level.play.model.User user = userService.searchUser(username);
+    public ResponseEntity<Object> searchUser(@RequestBody String requestBody) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        User userDto = objectMapper.readValue(requestBody, User.class);
+
+
+        com.level.play.model.User user = userService.searchUser(userDto.getUsername());
 
         if (user != null) {
             return new ResponseEntity<>(user, HttpStatus.OK);
