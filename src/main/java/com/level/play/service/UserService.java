@@ -74,8 +74,11 @@ public class UserService {
         // Check if the user exists
         if (user == null) {
             log.info("User does not exists");
+            throw new Exception("User not found");
         }
 
         return user;
     }
+
+    // Other methods for user-related operations
 }

@@ -24,7 +24,7 @@ public class GameController {
     }
 
     @PostMapping("/search/game")
-    public ResponseEntity<Object> searchGame(@RequestBody String title) {
+    public ResponseEntity<Object> searchGame(@RequestParam String title) {
         // Validate username and password (optional)
         log.info("Game api controller invoked...");
 
