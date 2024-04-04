@@ -23,7 +23,7 @@
                 challenge_result VARCHAR(20),
                 FOREIGN KEY (challenger_id) REFERENCES Users (user_id),
                 FOREIGN KEY (opponent_id) REFERENCES Users (user_id),
-                FOREIGN KEY (game_id) REFERENCES Games (game_id)
+                FOREIGN KEY (game_id) REFERENCES Games (id)
             );
         </sql>
     </changeSet>

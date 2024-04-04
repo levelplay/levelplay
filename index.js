@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const loginInCorrectError = document.getElementsByClassName("login-incorrect-error")[0];
 
+    const openGamesListDiv = document.getElementsByClassName("open-games-list")[0];
+
+    const homeButton = document.getElementById("home-button");
 
     // Function to show login page
     function showLoginPage() {
@@ -180,14 +183,28 @@ document.addEventListener("DOMContentLoaded", function() {
         })
             .then(response => {
                 if (!response.ok) {
+                    alert("user not found");
                     throw new Error('Network response was not ok');
                 }
-                return true;
+                return response.json();
             })
             .then(data => {
-                console.log('Success:', data);
+
+                // console.log('Success:', data);
+                let username = data['username'];
+                console.log(username)
+                // Create a new <p> element
+                let paragraph = document.createElement("p");
+
+                // Set the text content of the <p> element to the username
+                paragraph.textContent =  username;
+                paragraph.style.textAlign = "center";
+
+                // Append the <p> element to the div
+                openGamesListDiv.appendChild(paragraph);
+
+                // openGamesListDiv.innerHtml = `<p>${username}</p>`
                 showMainPage();
-                // Optionally, you can perform actions after successful submission
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -246,6 +263,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener for opening search button for add player , search game
    openSearchGameButton.addEventListener("click", function() {
         showOpenSearchGamePage();
+    });
+
+    // Event listener for opening search button for add player , search game
+    homeButton.addEventListener("click", function() {
+        showMainPage();
     });
 
     // Initial page load: show login page

@@ -19,7 +19,7 @@
                 game_id         INT,
                 start_date      DATE,
                 end_date        DATE,
-                FOREIGN KEY (game_id) REFERENCES Games (game_id)
+                FOREIGN KEY (game_id) REFERENCES Games (id)
             );
         </sql>
     </changeSet>

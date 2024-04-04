@@ -29,20 +29,15 @@ public class GameService {
     }
 
 
-    public com.level.play.model.Game addGame(com.level.play.dto.Game game) {
-        // Check if the game or email is already taken
-        if (gameRepository.existsByGameName(game.getGameName())) {
-            throw new IllegalArgumentException("Game already exists");
-        }
-
-        com.level.play.model.Game gameEntity = new com.level.play.model.Game();
-        gameEntity.setGameName(game.getGameName());
-        gameEntity.setGameDescription(gameEntity.getGameDescription());
-
-        // Save the game in the database
-        gameRepository.save(gameEntity);
-
-        return gameEntity;
-    }
-
+    // public User searchUser(String username) throws Exception {
+    //        log.info("Retrieving user by username....");
+    //        User user = userRepository.findByUsername(username);
+    //
+    //        // Check if the user exists
+    //        if (user == null) {
+    //            log.info("User does not exists");
+    //        }
+    //
+    //        return user;
+    //    }
 }
