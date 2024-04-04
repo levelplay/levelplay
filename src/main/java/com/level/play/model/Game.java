@@ -17,8 +17,4 @@ public class Game {
 
     private String gameDescription;
 
-    private String player1;
-
-    private String player2;
-
 }

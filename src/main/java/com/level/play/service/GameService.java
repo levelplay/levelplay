@@ -37,7 +37,7 @@ public class GameService {
 
         com.level.play.model.Game gameEntity = new com.level.play.model.Game();
         gameEntity.setGameName(game.getGameName());
-        gameEntity.setGameDescription(gameEntity.getGameDescription());
+        gameEntity.setGameDescription(game.getGameDescription());
 
         // Save the game in the database
         gameRepository.save(gameEntity);
