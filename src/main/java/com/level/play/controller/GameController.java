@@ -3,9 +3,7 @@ package com.level.play.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.level.play.dto.Game;
-import com.level.play.dto.User;
 import com.level.play.service.GameService;
-import com.level.play.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,13 +26,9 @@ public class GameController {
     @PostMapping("/search/game")
     public ResponseEntity<Object> searchGame(@RequestBody String requestBody) throws JsonProcessingException {
         // Validate username and password (optional)
-        log.info("Game api controller invoked...");
+        log.info("Search Game api controller invoked...");
         ObjectMapper objectMapper = new ObjectMapper();
         Game gameDto = objectMapper.readValue(requestBody, Game.class);
-
-
-        // Check if the game exists and password matches
-        //TODO: implement list to return simliar game titles
 
         com.level.play.model.Game game = gameService.searchGame(gameDto.getGameName());
         if (game != null) {
@@ -43,4 +37,17 @@ public class GameController {
             return new ResponseEntity<>("Game not found.", HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @PostMapping("/add/game")
+    public ResponseEntity<Object> addGame(@RequestBody String requestBody) throws JsonProcessingException {
+        log.info("Add Game api controller invoked...");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Game gameDto = objectMapper.readValue(requestBody, Game.class);
+
+        com.level.play.model.Game savedGame = gameService.addGame(gameDto);
+
+        return new ResponseEntity<>(savedGame, HttpStatus.CREATED);
+
+    }
+
 }
