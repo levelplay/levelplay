@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const openGamesListDiv = document.getElementsByClassName("open-games-list")[0];
 
     const homeButton = document.getElementById("home-button");
+    const logOutButton = document.getElementById("log-out");
 
     // Function to show login page
     function showLoginPage() {
@@ -43,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         openSearchGamePage.style.display = "none";
         gamePage.style.display = "none";
         loginInCorrectError.style.display = "none";
+
     }
 
     // Function to show find friends page
@@ -189,10 +191,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(data => {
-
+                openGamesListDiv.textContent = "";
                 // console.log('Success:', data);
                 let username = data['username'];
-                console.log(username)
+
                 // Create a new <p> element
                 let paragraph = document.createElement("p");
 
@@ -219,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const playerName = document.getElementsByName("search-game")[0].value;
         const apiUrl = 'http://localhost:8086/levelplay/api/games/search/game';
 
-        const formDataObject = {"title":playerName};
+        const formDataObject = {"gameName":playerName};
         fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -229,12 +231,25 @@ document.addEventListener("DOMContentLoaded", function() {
         })
             .then(response => {
                 if (!response.ok) {
+                    alert("game not found");
                     throw new Error('Network response was not ok');
                 }
-                return true;
+                return response.json();
             })
             .then(data => {
-                console.log('Success:', data);
+                openGamesListDiv.textContent = "";
+                // console.log('Success:', data);
+                let username = data['gameName'];
+
+                // Create a new <p> element
+                let paragraph = document.createElement("p");
+
+                // Set the text content of the <p> element to the username
+                paragraph.textContent =  username;
+                paragraph.style.textAlign = "center";
+
+                // Append the <p> element to the div
+                openGamesListDiv.appendChild(paragraph);
                 showMainPage();
                 // Optionally, you can perform actions after successful submission
             })
@@ -265,11 +280,18 @@ document.addEventListener("DOMContentLoaded", function() {
         showOpenSearchGamePage();
     });
 
-    // Event listener for opening search button for add player , search game
+
     homeButton.addEventListener("click", function() {
+        openGamesListDiv.textContent = "";
         showMainPage();
+
     });
 
+
+    logOutButton.addEventListener("click", function() {
+       showLoginPage();
+
+    });
     // Initial page load: show login page
     showLoginPage();
     // showMainPage();
